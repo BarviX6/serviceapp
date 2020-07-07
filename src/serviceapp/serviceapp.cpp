@@ -1690,6 +1690,25 @@ static PyMethodDef serviceappMethods[] = {
 	 {NULL,NULL,0,NULL}
 };
 
+#if PY_MAJOR_VERSION >= 3
+	static struct PyModuleDef moduledef = {
+		PyModuleDef_HEAD_INIT,
+		"serviceapp",					/* m_name */
+		"Module for serviceapp",		/* m_doc */
+		-1,									/* m_size */
+		serviceappMethods,			/* m_methods */
+		NULL,								/* m_reload */
+		NULL,								/* m_traverse */
+		NULL,								/* m_clear */
+		NULL,								/* m_free */
+	};
+
+PyMODINIT_FUNC PyInit_serviceapp(void)
+{
+    return PyModule_Create(&moduledef);
+}
+#else
+
 PyMODINIT_FUNC
 initserviceapp(void)
 {
@@ -1710,3 +1729,4 @@ initserviceapp(void)
 	SSL_load_error_strings();
 	SSL_library_init();
 }
+#endif
