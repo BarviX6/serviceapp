@@ -221,21 +221,13 @@ int detectEncoding(const std::string &content, std::string &encoding)
 int convertToUTF8(const std::string &input_string, const std::string &input_encoding, std::string &output_string)
 {
     PyObject *py_string, *py_unicode;
-#if PY_MAJOR_VERSION >= 3
     py_string = PyString_FromStringAndSize(input_string.c_str(), input_string.length());
-#else
-    py_string = PyString_FromStringAndSize(input_string.c_str(), input_string.length());
-#endif
     if (py_string == NULL)
     {
         PyErr_Print();
         return 1;
     }
-#if PY_MAJOR_VERSION >= 3
     py_unicode = PyString_AsDecodedObject(py_string, input_encoding.c_str(), "strict");
-#else
-    py_unicode = PyString_AsDecodedObject(py_string, input_encoding.c_str(), "strict");
-#endif
     if (py_unicode == NULL)
     {
         Py_DECREF(py_string);
@@ -243,11 +235,7 @@ int convertToUTF8(const std::string &input_string, const std::string &input_enco
         return 1;
     }
     Py_DECREF(py_string);
-#if PY_MAJOR_VERSION >= 3
     py_string = PyUnicode_AsUTF8String(py_unicode);
-#else
-    py_string = PyUnicode_AsUTF8String(py_unicode);
-#endif
     if (py_string == NULL)
     {
         Py_DECREF(py_unicode);
@@ -255,11 +243,7 @@ int convertToUTF8(const std::string &input_string, const std::string &input_enco
         return 1;
     }
     Py_DECREF(py_unicode);
-#if PY_MAJOR_VERSION >= 3
     output_string = PyString_AsString(py_string);
-#else
-    output_string = PyString_AsString(py_string);
-#endif
     Py_DECREF(py_string);
     return 0;
 }
