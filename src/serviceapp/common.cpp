@@ -8,7 +8,6 @@
 #include <sys/stat.h>
 
 #include "common.h"
-#include <Python.h>
 
 SettingEntry::SettingEntry():m_is_set(false){}
 SettingEntry::SettingEntry(const std::string &app_arg, int value, const std::string value_type):
