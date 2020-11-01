@@ -20,8 +20,6 @@
 #include "gstplayer.h"
 #include "exteplayer3.h"
 
-#include <Python.h>
-
 enum
 {
 	SUBSERVICES_INDEX_START = 1,
@@ -1693,17 +1691,17 @@ static PyMethodDef serviceappMethods[] = {
 };
 
 #if PY_MAJOR_VERSION >= 3
-static struct PyModuleDef moduledef = {
-	PyModuleDef_HEAD_INIT,
-	"serviceapp",         /* m_name */
-	"serviceapp",        /* m_doc */
-	-1,                  /* m_size */
-	serviceappMethods,   /* m_methods */
-	NULL,                /* m_reload */
-	NULL,                /* m_traverse */
-	NULL,                /* m_clear */
-	NULL,                /* m_free */
-};
+	static struct PyModuleDef moduledef = {
+		PyModuleDef_HEAD_INIT,
+		"serviceapp",					/* m_name */
+		"Module for serviceapp",		/* m_doc */
+		-1,									/* m_size */
+		serviceappMethods,			/* m_methods */
+		NULL,								/* m_reload */
+		NULL,								/* m_traverse */
+		NULL,								/* m_clear */
+		NULL,								/* m_free */
+	};
 
 PyMODINIT_FUNC PyInit_serviceapp(void)
 {

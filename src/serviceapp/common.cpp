@@ -228,7 +228,8 @@ int convertToUTF8(const std::string &input_string, const std::string &input_enco
     py_string = PyString_FromStringAndSize(input_string.c_str(), input_string.length());
 #endif
     if (py_string == NULL)
-    {        PyErr_Print();
+    {
+        PyErr_Print();
         return 1;
     }
 #if PY_MAJOR_VERSION >= 3
